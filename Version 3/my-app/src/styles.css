@@ -1,0 +1,11 @@
+.formApre {
+    display: flex;
+}
+
+.fechaDate {
+    margin-bottom: 2%;
+}
+
+.infoHeroes{
+    border: 1px solid green;
+}
