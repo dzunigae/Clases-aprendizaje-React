@@ -1,29 +1,23 @@
-import React from "react";
-import { heroes } from "./heroes";
-import ViewInfo from "./ViewInfo";
 import { useState } from "react";
+import AddCategory from "./components/AddCategory";
 
 const HelloWorld = () => {
-  const [valueImg, setValueImg] = useState();
-  
-  const getImagenes = async () => {
-    try {
-      const ApiKey = "PXXFcw5HPuxFF3fDjQ4fE81xlEcG0ESa";
-      const peticion = await fetch(
-        `https://api.giphy.com/v1/gifs/random?api_key=${ApiKey}`
-      );
-      const { data } = await peticion.json();
-      const { url } = data.images.original;
-      const img = document.createElement('img');
-      img.src = url;
-      document.body.append(img);
-    } catch (error) {
-      console.log(error)
-    }
-  };
-
-  getImagenes();
-
+  const [categorias, setCategorias] = useState(['One Punch Man', 'Dragon Ball']);
+  const agregarCategoria = (newCategory) => {
+    setCategorias([...categorias,newCategory]);
+  }
+  return (
+    <div>
+      <AddCategory onNewCategory={(e)=>agregarCategoria(e)} />
+      <ol>
+        {
+          categorias.map((category) => {
+            return <li key={category}>{category}</li>
+          })
+        }
+      </ol>
+    </div>
+  );
 };
 
 export default HelloWorld;
