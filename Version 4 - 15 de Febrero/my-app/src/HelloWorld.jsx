@@ -1,23 +1,25 @@
 import { useState } from "react";
-import AddCategory from "./components/AddCategory";
+import { AddCategory } from "./components/AddCategory";
+import { GitGrid } from "./components/GitGrid";
 
-const HelloWorld = () => {
-  const [categorias, setCategorias] = useState(['One Punch Man', 'Dragon Ball']);
-  const agregarCategoria = (newCategory) => {
-    setCategorias([...categorias,newCategory]);
-  }
+const HelloWord = () => {
+  const [categorias, setCategorias] = useState(["One Punch", "Dragon Ball"]);
+
+  console.log("🚀 ~ file: HelloWord.jsx:6 ~ HelloWord ~ categorias", categorias);
+  const agregarCategorias = (newCategory) => {
+    setCategorias([...categorias, newCategory]);
+  };
   return (
     <div>
-      <AddCategory onNewCategory={(e)=>agregarCategoria(e)} />
+      <AddCategory onNewCategory={(e)=>agregarCategorias(e)}  />
+
       <ol>
-        {
-          categorias.map((category) => {
-            return <li key={category}>{category}</li>
-          })
-        }
+        {categorias.map((category) => {
+          return <GitGrid key={category} category={category}/>;
+        })}
       </ol>
     </div>
   );
 };
 
-export default HelloWorld;
+export default HelloWord;
