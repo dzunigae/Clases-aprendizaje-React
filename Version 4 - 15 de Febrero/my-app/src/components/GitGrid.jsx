@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const GitGrid = ({ category }) => {
   const [valueImg, setValueImg] = useState("");
+
   const getGifs = async () => {
     const url = `https://api.giphy.com/v1/gifs/search?api_key=Ttl4VAZ6oqqGkgvX7Kh1zXR2QOibn6ZA&q=${category}&limit=20`;
     const resp = await fetch(url);
@@ -12,15 +13,21 @@ export const GitGrid = ({ category }) => {
       title: img.title,
       url: img.images.downsized_medium.url,
     }));
-    
+
     setValueImg(gifs);
     return gifs;
   };
-  getGifs(category);
+
+  useEffect(() => {
+    getGifs();
+  }, []);
 
   return (
     <div>
-      <img src={valueImg[0]?.url} />
+      <center>
+        <center><h5>{category}</h5></center>
+        <img src={valueImg[0]?.url} className="tarea" alt="imagen default"/>
+      </center>
     </div>
   );
 };
